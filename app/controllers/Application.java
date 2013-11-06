@@ -1,5 +1,9 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import play.*;
 import play.mvc.*;
 
@@ -59,5 +63,11 @@ public class Application extends Controller {
         //Fixtures.deleteDatabase();
         render(comptes,adherents,retards);
     }
+    /*
+    public static void backup() throws IOException{
+        File fi = File.createTempFile("back", "up");
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fi));
+        
+    }*/
 
 }
