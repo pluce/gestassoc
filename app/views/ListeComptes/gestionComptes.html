@@ -1,0 +1,81 @@
+#{extends 'main.html' /}
+#{set title:'Gestion des comptes' /}
+<h2>Gestion des comptes <a data-toggle="modal" href="#modalNouvCompte" class="btn btn-primary btn-xs">Nouveau compte</a></h2>
+<div class="col-lg-4">
+    <h4>Comptes espèces</h4>
+    <ul>
+    #{list items:comptes, as:'mcpt'}
+            #{if mcpt.type == models.TypeCompte.ESPECE}
+                <li><a href="@{ListeComptes.etatCompte(mcpt.id)}">${mcpt.libelle}</a></li>
+            #{/if}
+          #{/list}
+    </ul>
+</div>
+
+<div class="col-lg-4">
+    <h4>Comptes bancaires</h4>
+    <ul>
+    #{list items:comptes, as:'mcpt'}
+            #{if mcpt.type == models.TypeCompte.BANQUE}
+                <li><a href="@{ListeComptes.etatCompte(mcpt.id)}">${mcpt.libelle}</a></li>
+            #{/if}
+          #{/list}
+    </ul>
+</div>
+
+<div class="col-lg-4">
+    <h4>Comptes tiers</h4>
+    <ul>
+    #{list items:comptes, as:'mcpt'}
+            #{if mcpt.type == models.TypeCompte.TIERS}
+                <li><a href="@{ListeComptes.etatCompte(mcpt.id)}">${mcpt.libelle}</a></li>
+            #{/if}
+          #{/list}
+    </ul>
+</div>
+
+
+<div class="modal fade" id="modalNouvCompte" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Nouveau compte</h4>
+      </div>
+      <div class="modal-body">
+          <form id="formNewCompte" class="form-horizontal" role="form" method="POST" action="@{ListeComptes.newCompte}">
+  <div class="form-group">
+    <label for="libelle" class="col-lg-4 control-label">Libellé</label>
+    <div class="col-lg-6">
+      <input name="libelle" type="text" class="form-control" id="libelle" placeholder="Nom du compte"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="type" class="col-lg-4 control-label">Type du compte</label>
+    <div class="col-lg-6">
+        <select class="form-control" id="type" name="type">
+            <option value="ESPECE">Espèce</option>
+            <option value="BANQUE">Bancaire</option>
+            <option value="TIERS">Tiers</option>
+          </select>
+    </div>
+  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler et fermer</button>
+        <button id="submitFormNewCompte" type="button" class="btn btn-primary">Sauvegarder et fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#submitFormNewCompte").click(function(){
+            $("#formNewCompte").submit();
+        });
+    });
+    </script>
+    

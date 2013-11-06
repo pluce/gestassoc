@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+
+GET     /                                               Application.index
+
+GET     /compte/{compteId}                            ListeComptes.etatCompte
+GET     /compte                                         ListeComptes.gestionComptes
+
+GET     /mouvement/{id}/redirect/{redirect}           ListeComptes.supprimerMouvement
+
+GET     /adherent                            ListeAdherents.etatAdherents
+GET     /adherent/retards                            ListeAdherents.etatRetards
+POST     /adherent/new                            ListeAdherents.newAdherent
+POST     /adherent/edit                            ListeAdherents.editAdherent
+GET     /adherent/edit/{id}                            ListeAdherents.ficheEditAdherent
+
+GET     /adherent/{id}/delete                   ListeAdherents.supprimerAdherent
+
+GET     /adherent/{id}/cotisation               ListeAdherents.nouvelleCotisation
+POST    /adherent/{id}/cotisation               ListeAdherents.enregistrerCotisation
+
+GET     /association                            ReglagesAssoc.index
+
+*     /                                         module:crud
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

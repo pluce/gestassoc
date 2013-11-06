@@ -1,0 +1,40 @@
+#{extends 'main.html' /}
+#{set title:'Accueil' /}
+
+<div class="col-lg-4">
+    
+        <h4><a href="@{ListeAdherents.etatAdherents()}">${adherents.size} adhérents</a></h4>
+        <h4><a href="@{ListeAdherents.etatRetards}">${retards.size} en retard de cotisation</a></h4>
+    
+</div>
+
+<div class="col-lg-4">
+    
+        <table class="table table-condensed">
+            <tbody>
+        #{list items:comptes,as:'cpt'}
+            #{if cpt.type != models.TypeCompte.TIERS}
+                <tr>
+                    <td>
+                        <a href="@{ListeComptes.etatCompte(cpt.id)}">${cpt.libelle}</a>
+                    </td>
+                    <td class="
+                    #{if cpt.dernierSoldeConsolide >= 0}
+                        success
+                    #{/if}
+                    #{else}
+                        danger
+                    #{/else}
+                    ">${cpt.dernierSoldeConsolide} €</td>
+                </tr>
+            #{/if}
+        #{/list}
+            </tbody>
+        </table>
+    
+</div>
+
+<div class="col-lg-4">
+    
+    
+</div>
