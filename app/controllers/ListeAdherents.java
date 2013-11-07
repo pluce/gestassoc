@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import models.Adherent;
@@ -145,9 +146,16 @@ public class ListeAdherents extends Controller {
     public static void mailingPDF(){
         List<Adherent> la = Adherent.findAll();
         PDF.MultiPDFDocuments mul = new PDF.MultiPDFDocuments("Mailing.pdf");
+        String ville = "Tarnac";
+        String objet = "Cotisations 2014";
+        String texte = "Payez Payez !!!!\nSinon on vous pète les genoux !!!!";
+        List<String> paragraphes = null;
+        if(texte != null){
+            paragraphes = Arrays.asList(texte.split("\n"));
+        }
         
         for(Adherent dest: la){            
-            PDF.PDFDocument doc = new PDF.PDFDocument("mailing.html", null, dest);
+            PDF.PDFDocument doc = new PDF.PDFDocument("mailing.html", null, dest,ville,objet,paragraphes);
             mul.add(doc);
         }
         PDF.renderPDF(mul);
