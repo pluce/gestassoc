@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title>Mailing PDF</title>
+                <style>
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
+	margin:0;
+	padding:0;
+	border-width:0;
+}
+td, th {
+	border-style:solid;
+	border-width:1px;
+}
+table {
+	border-collapse:collapse;
+}
+li {
+	display:block;
+}
+body {
+	font-size:14px;
+	-epub-hyphens:auto;
+}
+p.Corps, .corps-in p {
+	-epub-hyphens:none;
+	-epub-ruby-position:over;
+	color:#1a171b;
+	font-family:"Droid Sans", sans-serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	text-align:justify;
+	text-decoration:none;
+	text-indent:14px;
+}
+p.Corps-Titre {
+	-epub-hyphens:none;
+	-epub-ruby-position:over;
+	color:#3592b5;
+	font-family:"Droid Sans", sans-serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	text-align:justify;
+	text-decoration:none;
+	text-indent:14px;
+}
+p.Corps-Note {
+	-epub-hyphens:none;
+	-epub-ruby-position:over;
+	color:#666666;
+	font-family:"Droid Sans", sans-serif;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	text-align:justify;
+	text-decoration:none;
+	text-indent:14px;
+}
+p.EnTete {
+	-epub-hyphens:none;
+	-epub-ruby-position:over;
+	color:#1a171b;
+	font-family:"Droid Sans", sans-serif;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	text-align:justify;
+	text-decoration:none;
+	text-indent:14px;
+}
+p.para-style-override-1 {
+	text-align:right;
+}
+
+#own_adress {
+    margin: 20px;
+    float: left;
+}
+#own_adress p, #ent_adress p {
+    margin: 2px;
+}
+
+#ent_adress {
+    margin: 50px 20px 30px 20px;
+    float: right;
+    width: 50%;
+}
+
+#corps {
+    clear:both;
+    margin: 20px;
+}
+p {
+    
+        margin: 10px 0px;
+}
+                </style>
+	</head>
+	<body id="lettre_motiv_cg87" xml:lang="fr-FR">
+		<div id="own_adress" class="Bloc-de-texte-standard">
+			<p class="Corps"> </p>
+			<p class="Corps-Note"> </p>
+			<p class="Corps-Note"> </p>
+			<p class="Corps-Note"> </p>
+			<p class="Corps-Note"> </p>
+		</div>
+		<div id="ent_adress" class="Bloc-de-texte-standard">			
+			<p class="EnTete">${dest.nom} ${dest.prenom}</p>                        
+			<p class="Corps-Note">${dest.adresse}</p>                        
+			<p class="Corps-Note">${dest.codePostal} ${dest.ville}</p>
+		</div>
+		<div id="corps" class="Bloc-de-texte-standard">
+                    <p class="Corps para-style-override-1">A ${ville}, le ${new Date().format('dd MMMM yyyy')}.</p>
+                    <p class="Corps-Titre">&#160;</p>
+                    <p class="Corps-Titre">Objet: ${objet}</p>
+                    <p class="Corps">Bonjour,</p>
+                    <div class="corps-in">
+                    %{
+                      for(par in paragraphes){
+                    }%
+                        <p>${par}</p>
+                    %{ } }%
+                    </div>
+                    <p class="Corps">Recevez, Madame, Monsieur, nos salutations les plus distinguées</p>
+
+                    <p class="Corps">&#9;&#9;</p>
+                    <p class="Corps">&#9;&#9;Nous</p>
+		</div>
+	</body>
+</html>
