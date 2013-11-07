@@ -15,8 +15,8 @@ import play.db.jpa.Model;
  */
 @Entity
 public class ParametreAssoc extends Model{
-    @Transient
-    public static final Long idActuel = 1L;
+    /*@Transient
+    public static final Long idActuel = 1L;*/
     
     @OneToOne
     public Annee anneeEnCours;

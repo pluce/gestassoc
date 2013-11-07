@@ -14,6 +14,6 @@ import play.db.jpa.GenericModel;
  */
 public class AssociationService {
     public static ParametreAssoc assocCourante(){
-        return ParametreAssoc.findById(ParametreAssoc.idActuel);
+        return ParametreAssoc.find("").first();
     }
 }
