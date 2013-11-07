@@ -13,6 +13,7 @@ import models.Mouvement;
 import models.ParametreAssoc;
 import models.TypeCompte;
 import play.db.jpa.GenericModel;
+import play.modules.pdf.PDF;
 import play.mvc.Controller;
 import services.AssociationService;
 
@@ -107,6 +108,49 @@ public class ListeAdherents extends Controller {
         adh.cotisations.add(an);
         adh.save();
         etatAdherents();
+    }
+    
+    public static void exportCSV(){
+       List<Adherent> la = Adherent.findAll();
+       StringBuilder sb = new StringBuilder();
+       sb.append("\uFEFF");
+       sb.append("id;nom;prenom;adresse;code postal;ville;telephone;email;date adhesion");
+       for(Adherent a: la){
+           sb.append("\n");
+           sb.append(a.id);
+           sb.append(";");
+           sb.append(a.nom);
+           sb.append(";");
+           sb.append(a.prenom);
+           sb.append(";");
+           sb.append(a.adresse);
+           sb.append(";");
+           sb.append(a.codePostal);
+           sb.append(";");
+           sb.append(a.ville);
+           sb.append(";");
+           sb.append(a.telephone);
+           sb.append(";");
+           sb.append(a.email);
+           sb.append(";");
+           sb.append(a.date);
+       }
+       
+       
+       response.setHeader("Content-Disposition", "attachment; filename=adherents.csv");
+       response.setHeader("Content-Type", "text/csv; charset=utf-8");
+       renderText(sb.toString());
+    }
+    
+    public static void mailingPDF(){
+        List<Adherent> la = Adherent.findAll();
+        PDF.MultiPDFDocuments mul = new PDF.MultiPDFDocuments("Mailing.pdf");
+        
+        for(Adherent dest: la){            
+            PDF.PDFDocument doc = new PDF.PDFDocument("mailing.html", null, dest);
+            mul.add(doc);
+        }
+        PDF.renderPDF(mul);
     }
     
 }

@@ -2,4 +2,5 @@
 
 require:
     - play
-    - play -> crud
+    - play -> crud    
+    - play -> pdf 0.9
