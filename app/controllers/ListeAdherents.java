@@ -13,6 +13,7 @@ import models.Compte;
 import models.Mouvement;
 import models.ParametreAssoc;
 import models.TypeCompte;
+import notifiers.Mails;
 import play.db.jpa.GenericModel;
 import play.modules.pdf.PDF;
 import play.mvc.Controller;
@@ -88,6 +89,14 @@ public class ListeAdherents extends Controller {
         etatAdherents();
     }
     
+    public static void pageMailingPDF(){
+        render();
+    }
+    
+    public static void pageMailingEmail(){
+        render();
+    }
+    
     public static void ficheEditAdherent(Long id){
         Adherent adh = Adherent.findById(id);
         render(adh);
@@ -143,22 +152,32 @@ public class ListeAdherents extends Controller {
        renderText(sb.toString());
     }
     
-    public static void mailingPDF(){
+    public static void mailingPDF(String objet, String corps, String style){
         List<Adherent> la = Adherent.findAll();
+        ParametreAssoc assoc = AssociationService.assocCourante();
         PDF.MultiPDFDocuments mul = new PDF.MultiPDFDocuments("Mailing.pdf");
         String ville = "Tarnac";
-        String objet = "Cotisations 2014";
-        String texte = "Payez Payez !!!!\nSinon on vous pète les genoux !!!!";
+        //String objet = "Cotisations 2014";
+        //String texte = "Payez Payez !!!!\nSinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! Sinon on vous pète les genoux !!!! ";
         List<String> paragraphes = null;
-        if(texte != null){
-            paragraphes = Arrays.asList(texte.split("\n"));
+        if(corps != null){
+            paragraphes = Arrays.asList(corps.split("\n"));
         }
         
         for(Adherent dest: la){            
-            PDF.PDFDocument doc = new PDF.PDFDocument("mailing.html", null, dest,ville,objet,paragraphes);
+            PDF.PDFDocument doc = new PDF.PDFDocument("mailing.html", null, dest,ville,objet,paragraphes,style,assoc);
             mul.add(doc);
         }
         PDF.renderPDF(mul);
+    }
+    
+    public static void mailingEmail(String objet, String corps, String style){
+        List<Adherent> la = Adherent.findAll();
+        
+        for(Adherent dest: la){            
+            Mails.newsletter(dest, objet, corps, style);
+        }
+        etatAdherents();
     }
     
 }

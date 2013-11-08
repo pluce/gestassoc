@@ -20,7 +20,15 @@ public class ParametreAssoc extends Model{
     
     @OneToOne
     public Annee anneeEnCours;
+    
     public String nom;
+    public String adresse;
+    public String codePostal;
+    public String ville;
+    public String telephone;
+    public String email;
+    
+    
     
     @OneToOne
     public Compte compteTiersParDefaut;

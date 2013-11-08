@@ -11,7 +11,40 @@
       <input name="nom" type="text" class="form-control" id="nom" value="${actuel.nom}" placeholder="Nom"/>
     </div>
   </div>
-    <div class="form-group">
+<fieldset><legend>Adresse</legend>
+                 
+  <div class="form-group">
+    <div class="col-lg-10">
+      <input name="adresse" type="text" class="form-control" id="fadresse" value="${actuel.adresse}" placeholder="Numéro et nom de rue"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-4">
+      <input name="codePostal" type="text" class="form-control" id="fcodePostal" value="${actuel.codePostal}" placeholder="Code Postal"/>
+    </div>
+    <div class="col-lg-6">
+      <input name="ville" type="text" class="form-control" id="fville" value="${actuel.ville}" placeholder="Commune"/>
+    </div>
+  </div>
+</fieldset>   
+<fieldset><legend>Contact</legend>
+                 
+  <div class="form-group">
+    <label for="email" class="col-lg-4 control-label">Email</label>
+    <div class="col-lg-6">
+      <input name="email" type="text" class="form-control" id="femail" value="${actuel.email}" placeholder="Adresse Email"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="telephone" class="col-lg-4 control-label">Téléphone</label>
+    <div class="col-lg-6">
+      <input name="telephone" type="text" class="form-control" id="ftelephone" value="${actuel.telephone}" placeholder="Numéro de Téléphone"/>
+    </div>
+  </div>
+</fieldset>     
+    
+              <fieldset><legend>Comptabilité</legend>
+  <div class="form-group">
     <label for="annee" class="col-lg-4 control-label">Exercice en cours</label>
     <div class="col-lg-6">
       <select disabled="disable" class="form-control" id="annee" name="annee">
@@ -40,7 +73,8 @@
             #{/list}
           </select>
     </div>
-  </div>      
+  </div>     
+              </fieldset>
   <div class="form-group">
     <div class="col-lg-offset-4 col-lg-6">
       <button type="submit" class="btn btn-primary">Enregistrer</button>

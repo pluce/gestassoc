@@ -22,6 +22,9 @@ GET     /adherent/{id}/delete                   ListeAdherents.supprimerAdherent
 GET     /adherent/{id}/cotisation               ListeAdherents.nouvelleCotisation
 POST    /adherent/{id}/cotisation               ListeAdherents.enregistrerCotisation
 
+GET     /mailing/pdf                            ListeAdherents.pageMailingPDF
+POST    /mailing/pdf                            ListeAdherents.mailingPDF
+
 GET     /association                            ReglagesAssoc.index
 
 *     /                                         module:crud

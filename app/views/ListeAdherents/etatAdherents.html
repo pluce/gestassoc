@@ -5,7 +5,8 @@
 <h2>Adhérents <a data-toggle="modal" href="#modalNouvAdherent" class="btn btn-primary btn-xs">Nouvel adhérent</a>
     <a href="@{ListeAdherents.etatRetards}" class="btn btn-default btn-xs">Etat des retards de cotisation</a>
     <a href="@{ListeAdherents.exportCSV}" class="btn btn-default btn-xs">Export CSV</a>
-    <a href="@{ListeAdherents.mailingPDF}" class="btn btn-default btn-xs">Mailing PDF</a>
+    <a data-toggle="modal"  data-target="#modalMailingPDF"  href="@{ListeAdherents.pageMailingPDF}" class="btn btn-default btn-xs">Mailing PDF</a>
+    <a data-toggle="modal"  data-target="#modalMailingEmail"  href="@{ListeAdherents.pageMailingEmail}" class="btn btn-default btn-xs">Mailing Email</a>
 </h2>
 
 <table class="table table-striped table-condensed">
@@ -125,6 +126,12 @@
 <div class="modal fade" id="modalCotisation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   
 </div>
+<div class="modal fade" id="modalMailingPDF" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+</div>
+<div class="modal fade" id="modalMailingEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+</div>
 
 
 <style>
@@ -167,6 +174,28 @@
           $('#modalEditAdherent').on('hidden.bs.modal', function () {
             
                 $("#modalEditAdherent").removeData('bs.modal');
+          });
+          
+          
+        $('#modalMailingPDF').on('shown.bs.modal', function () {
+            
+                $("#submitFormMailingPDF").click(function(){
+                    $("#formMailingPDF").submit();
+                });
+          });
+          $('#modalMailingPDF').on('hidden.bs.modal', function () {
+            
+                $("#modalMailingPDF").removeData('bs.modal');
+          });
+        $('#modalMailingEmail').on('shown.bs.modal', function () {
+            
+                $("#submitFormMailingEmail").click(function(){
+                    $("#formMailingEmail").submit();
+                });
+          });
+          $('#modalMailingEmail').on('hidden.bs.modal', function () {
+            
+                $("#modalMailingEmail").removeData('bs.modal');
           });
     });
     </script>

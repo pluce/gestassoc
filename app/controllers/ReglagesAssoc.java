@@ -24,10 +24,20 @@ public class ReglagesAssoc extends Controller {
         render(actuel,annees,comptes);
     }
     
-    public static void enregistrer(String nom, Long compte){
+    public static void enregistrer(String nom, Long compte, 
+            String email,
+            String telephone,
+            String adresse,
+            String codePostal,
+            String ville){
         ParametreAssoc actuel = AssociationService.assocCourante();
         actuel.nom = nom;
         actuel.compteTiersParDefaut = Compte.findById(compte);
+        actuel.email = email;
+        actuel.telephone = telephone;
+        actuel.adresse = adresse;
+        actuel.codePostal = codePostal;
+        actuel.ville = ville;
         actuel.save();
         index();
     }
